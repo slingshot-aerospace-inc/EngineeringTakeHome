@@ -1,13 +1,13 @@
 import "reflect-metadata";
 import { Query, Resolver } from "type-graphql";
-import { Player, PlayerResponse } from "./PlayerResponse";
+import { Player, PlayersResponse } from "./PlayerResponse";
 import data from "./data";
 
-@Resolver(() => PlayerResponse)
+@Resolver(() => PlayersResponse)
 export class PlayerResolver {
-  @Query(() => PlayerResponse)
-  async getPlayers(): Promise<PlayerResponse> {
-    const playerResponse = new PlayerResponse();
+  @Query(() => PlayersResponse)
+  async getPlayers(): Promise<PlayersResponse> {
+    const playerResponse = new PlayersResponse();
     playerResponse.players = data;
     return playerResponse;
   }

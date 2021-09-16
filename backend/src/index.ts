@@ -10,9 +10,11 @@ import { createServer } from "http";
 import ormConfig from "./ormconfig";
 import { SomethingResolver } from "./schema/something/SomethingResolver";
 import { PlayerResolver } from "./schema/players/PlayerResolver";
+import cors from "cors";
 
 async function initialize() {
   const expressApp = express();
+  expressApp.use(cors());
 
   const schema = await buildSchema({
     resolvers: [SomethingResolver, PlayerResolver],

@@ -22,7 +22,7 @@ export class Player {
 }
 
 @ObjectType()
-export class PlayerResponse {
+export class PlayersResponse {
   @Field(() => [Player])
   players: Player[];
 }
