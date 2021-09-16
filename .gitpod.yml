@@ -5,7 +5,7 @@ tasks:
     command: docker-compose up
   - name: Backend
     init: cd backend && npm i
-    command: cd backend && npm run dev
+    command: cd backend && npx wait-on -v tcp:localhost:5432 && npm run dev
   - name: Frontend
     init: cd frontend && npm i
     command: cd frontend && npm run start
