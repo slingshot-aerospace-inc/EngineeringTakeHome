@@ -4,8 +4,15 @@ tasks:
     init: docker-compose pull
     command: docker-compose up
   - name: Backend
-    init: cd backend && npm i
-    command: cd backend && npx wait-on -v tcp:localhost:5432 && npm run dev
+    init: |
+      sudo apt update
+      sudo apt install postgresql-client
+      cd backend
+      npm i
+    command: |
+      cd backend
+      while ! psql postgres://postgres:password@127.0.0.1:5432 -c 'SELECT 1'; do echo 'waiting for postgres'; sleep 1; done
+      npm run dev
   - name: Frontend
     init: cd frontend && npm i
     command: cd frontend && npm run start
