@@ -8,8 +8,11 @@ import {
 import { FunctionComponent } from "react";
 
 // do a little bit of magic to get the gitpod URL for the API
-const APP_API_URL = process.env.GITPOD_WORKSPACE_URL
-  ? process.env.GITPOD_WORKSPACE_URL.replace("https://", "https://3001-")
+const APP_API_URL = process.env.REACT_APP_GITPOD_WORKSPACE_URL
+  ? process.env.REACT_APP_GITPOD_WORKSPACE_URL.replace(
+      "https://",
+      "https://3001-"
+    )
   : process.env.REACT_APP_API;
 
 console.log(`Connecting to API ${APP_API_URL}`);
