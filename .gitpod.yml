@@ -5,10 +5,10 @@ tasks:
     command: docker-compose up
   - name: Backend
     init: cd backend || npm i
-    command: cd backend || npm run dev
+    command: npm run dev
   - name: Frontend
     init: cd frontend || npm i
-    command: cd frontend || npm run start
+    command: npm run start
 # Ports to expose on workspace startup
 ports:
   - port: 3000
