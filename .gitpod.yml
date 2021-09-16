@@ -1,4 +1,8 @@
 # image: node:16.9.1-alpine3.14
+github:
+  prebuilds:
+    # enable for the master/default branch (defaults to true)
+    master: true
 # Commands to start on workspace startup
 tasks:
   - name: Backend
