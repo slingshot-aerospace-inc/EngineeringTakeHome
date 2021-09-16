@@ -2,11 +2,11 @@
 # Commands to start on workspace startup
 tasks:
   - name: Backend
-    init: pushd backend && npm i
-    command: npm run dev
+    init: cd backend || npm i
+    command: cd backend || npm run dev
   - name: Frontend
-    init: pushd frontend && npm i
-    command: npm run start
+    init: cd frontend || npm i
+    command: cd frontend || npm run start
 # Ports to expose on workspace startup
 ports:
   - port: 3000
