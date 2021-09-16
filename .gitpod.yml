@@ -1,0 +1,13 @@
+# image: 16.9.1-alpine3.14
+# Commands to start on workspace startup
+tasks:
+  - name: Backend
+    init: pushd backend && npm i
+    command: pushd backend && npm run dev
+  - name: Frontend
+    init: pushd frontend && npm i
+    command: pushd frontend && npm run start
+# Ports to expose on workspace startup
+ports:
+  - port: 3000
+    onOpen: open-preview
