@@ -1,4 +1,7 @@
 import { ApolloServer } from "apollo-server-express";
+const {
+  ApolloServerPluginLandingPageGraphQLPlayground,
+} = require("apollo-server-core");
 import express from "express";
 import { GraphQLSchema } from "graphql";
 import { createServer } from "http";
@@ -18,6 +21,11 @@ async function initialize() {
   const apolloServer = new ApolloServer({
     schema,
     context: { em: typeORM.createEntityManager() },
+    plugins: [
+      ApolloServerPluginLandingPageGraphQLPlayground({
+        settings: { ["request.credentials"]: "same-origin" },
+      }),
+    ],
   });
   await apolloServer.start();
   // hook apollo into express at path
