@@ -8,7 +8,7 @@ export class Player {
   @Field()
   age: number;
 
-  @Field()
+  @Field(() => [String])
   position: string[];
 
   @Field()
@@ -23,6 +23,6 @@ export class Player {
 
 @ObjectType()
 export class PlayerResponse {
-  @Field()
+  @Field(() => [Player])
   players: Player[];
 }
