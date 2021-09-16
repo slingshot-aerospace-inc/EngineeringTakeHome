@@ -1,3 +1,5 @@
+image:
+  file: .gitpod.dockerfile
 # Commands to start on workspace startup
 tasks:
   - name: docker-compose
@@ -5,8 +7,6 @@ tasks:
     command: docker-compose up
   - name: Backend
     init: |
-      sudo apt update
-      sudo apt install -y postgresql-client
       cd /workspace/slingshot-takehome/backend
       npm i
     command: |
