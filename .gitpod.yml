@@ -11,7 +11,7 @@ tasks:
       npm i
     command: |
       cd /workspace/slingshot-takehome/backend
-      while ! psql postgres://postgres:password@127.0.0.1:5432 -c 'SELECT 1'; do echo 'waiting for postgres'; sleep 1; done
+      while ! psql postgres://postgres:password@127.0.0.1:5432 --pset=pager=off -c 'SELECT 1'; do echo 'waiting for postgres'; sleep 1; done
       npm run dev
   - name: Frontend
     init: cd /workspace/slingshot-takehome/frontend && npm i
