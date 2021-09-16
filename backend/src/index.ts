@@ -16,6 +16,8 @@ async function initialize() {
   const expressApp = express();
   expressApp.use(cors());
 
+  expressApp.get("/", (req, res) => res.status(301).redirect("/graphql"));
+
   const schema = await buildSchema({
     resolvers: [SomethingResolver, PlayerResolver],
   });
