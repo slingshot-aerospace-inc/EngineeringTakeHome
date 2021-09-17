@@ -19,7 +19,7 @@ define(PlayerEntity, () => {
     "Spurs",
     "Man City",
   ]);
-  player.foot = Faker.random.arrayElement(["Left", "Right"]);
+  player.foot = Faker.random.arrayElement(["Left", "Right", "Both"]);
   player.rating = Faker.datatype.number(100);
 
   return player;
