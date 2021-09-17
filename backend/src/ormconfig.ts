@@ -22,8 +22,8 @@ const connection: ConnectionOptions = {
   namingStrategy: new SnakeNamingStrategy(),
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore additional fields for typeorm-seeding
-  seeds: [__dirname + "/database/seeds/**/*{.ts,.js}"],
-  factories: [__dirname + "/schema/**/*-factory{.ts,.js}"],
+  seeds: [__dirname + "/database/seeds/**/*Seed{.ts,.js}"],
+  factories: [__dirname + "/schema/**/*Factory{.ts,.js}"],
 };
 
 export default connection;
