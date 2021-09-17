@@ -14,6 +14,6 @@ export class Players implements Seeder {
       .into(PlayerEntity)
       .values(players)
       .execute();
-    await factory(PlayerEntity)().createMany(10);
+    await factory(PlayerEntity)().createMany(1000);
   }
 }

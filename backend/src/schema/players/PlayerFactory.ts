@@ -11,7 +11,14 @@ define(PlayerEntity, () => {
     ["LW", "CT", "RW", "ST", "CF", "CAM"],
     Faker.datatype.number({ min: 1, max: 3 })
   );
-  player.team = Faker.random.word();
+  player.team = Faker.random.arrayElement([
+    "Everton",
+    "PSG",
+    "Dortmund",
+    "Chelsea",
+    "Spurs",
+    "Man City",
+  ]);
   player.foot = Faker.random.arrayElement(["Left", "Right"]);
   player.rating = Faker.datatype.number(100);
 
