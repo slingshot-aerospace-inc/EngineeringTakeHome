@@ -25,6 +25,9 @@ ports:
   - port: 3001
     onOpen: open-browser
     visibility: public
+  - port: 5432
+    onOpen: ignore
+    visibility: private
 github:
   prebuilds:
     # enable for the default branch (defaults to true)
