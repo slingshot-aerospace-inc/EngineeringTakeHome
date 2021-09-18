@@ -35,21 +35,26 @@ def match_exists(date, team1, team2):
 def main():
   try:
     while True:
-      r = requests.get('http://localhost:8000/last_match_results')
-      res = json.loads(r.text)
-      date = datetime.datetime.fromtimestamp(res['match_date_time'])
-      team1 = res['team1']['name']
-      team2 = res['team2']['name']
-      team1_players = [ player['id'] for player in res['team1']['players']]
-      team2_players = [ player['id'] for player in res['team2']['players']]
-      team1_score = res['result']['team1_score']
-      team2_score = res['result']['team2_score']
-      winner = res['result']['winner']
-      print(f"Got result of match on {date} between {team1} ({team1_score}) and {team2} ({team2_score}) winner: {winner}")
-      if not match_exists(date, team1, team2):
-        print(f"Storing match result on {date} between {team1} and {team2}")
-        store_match_results(date, team1, team2, team1_players, team2_players, team1_score, team2_score, winner)
+      try:
+        r = requests.get('http://localhost:8000/last_match_results')
+        res = json.loads(r.text)
+        date = datetime.datetime.fromtimestamp(res['match_date_time'])
+        team1 = res['team1']['name']
+        team2 = res['team2']['name']
+        team1_players = [ player['id'] for player in res['team1']['players']]
+        team2_players = [ player['id'] for player in res['team2']['players']]
+        team1_score = res['result']['team1_score']
+        team2_score = res['result']['team2_score']
+        winner = res['result']['winner']
+        print(f"Got result of match on {date} between {team1} ({team1_score}) and {team2} ({team2_score}) winner: {winner}")
+        if not match_exists(date, team1, team2):
+          print(f"Storing match result on {date} between {team1} and {team2}")
+          store_match_results(date, team1, team2, team1_players, team2_players, team1_score, team2_score, winner)
+        sleep(1)
+      except Exception as e:
+        print("Exception during processing")
+        print(e)
+        sleep(5)
 
-      sleep(1)
   except KeyboardInterrupt:
     print("Quitting...")
