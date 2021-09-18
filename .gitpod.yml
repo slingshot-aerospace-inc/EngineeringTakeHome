@@ -2,9 +2,23 @@ image:
   file: .gitpod.dockerfile
 # Commands to start on workspace startup
 tasks:
-  - name: docker-compose
+  - name: DB
     init: docker-compose pull
     command: docker-compose up
+  - name: Simulator
+    init: |
+      cd /workspace/slingshot-takehome/simulator
+      pipenv install
+    command: |
+      cd /workspace/slingshot-takehome/simulator
+      pipenv run uvicorn main:app --reload
+  - name: Ingest
+    init: |
+      cd /workspace/slingshot-takehome/ingest
+      pipenv install
+    command: |
+      cd /workspace/slingshot-takehome/ingest
+      python -m src
   - name: Backend
     init: |
       cd /workspace/slingshot-takehome/backend
