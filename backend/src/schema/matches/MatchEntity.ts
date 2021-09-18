@@ -5,7 +5,11 @@ import {
   PrimaryGeneratedColumn,
   Index,
   CreateDateColumn,
+  JoinColumn,
+  ManyToMany,
+  JoinTable,
 } from "typeorm";
+import { PlayerEntity } from "../players/PlayerEntity";
 
 @ObjectType()
 @Index("match_pkey", ["id"], { unique: true })
@@ -26,6 +30,14 @@ export class MatchEntity {
   @Field(() => String)
   @Column()
   team2: string;
+
+  @ManyToMany(() => PlayerEntity)
+  @JoinTable()
+  team1_players: PlayerEntity[];
+
+  @ManyToMany(() => PlayerEntity)
+  @JoinTable()
+  team2_players: PlayerEntity[];
 
   @Field(() => Int)
   @Column()
