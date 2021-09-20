@@ -21,14 +21,14 @@ export type Player = {
   team: Scalars['String'];
 };
 
-export type PlayerResponse = {
-  __typename?: 'PlayerResponse';
+export type PlayersResponse = {
+  __typename?: 'PlayersResponse';
   players: Array<Player>;
 };
 
 export type Query = {
   __typename?: 'Query';
-  getPlayers: PlayerResponse;
+  getPlayers: PlayersResponse;
   getSomething: SomethingResponse;
 };
 
