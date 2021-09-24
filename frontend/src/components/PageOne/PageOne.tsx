@@ -1,8 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
-import { PlayerResponse } from "../../types/graphql";
+import { PlayersResponse } from "../../types/graphql";
 
 export function PageOne() {
-  const { data, loading } = useQuery<PlayerResponse>(gql`
+  const { data, loading } = useQuery<PlayersResponse>(gql`
     query {
       getPlayers {
         players {
