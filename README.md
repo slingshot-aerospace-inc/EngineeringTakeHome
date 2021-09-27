@@ -21,6 +21,9 @@ Launch the containers with docker-compose: `docker-compose --build up`
 1. Once the containers are pulled and the VS Code IDE opens up the containers will be launched
 1. Terminal output of each container is in bottom right
 
+## Application Overview
+The application is a simple set of services that form a simple backbone of an application.  The application as a whole deals with soccer players and matches.  Players have entries with some data about them.  Matches are the recorded result of a match between two teams composed of players.  The frontend has a barebones app that queries the backend server for some data and currently just displays it as text in a tab.  The backend server is a GraphQL server with an endpoint that reads data out of the database and responds to API requests.  The ingest service reads an "external" API server to gather data on matches and stores them into the match table in the database.  The simulator is a fake "external" API server that produces data on match events.
+
 ## Frontend
 The frontend code is a Create React App application using Typescript.  More documentation for the frontend can be found [here](frontend).
 
