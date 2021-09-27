@@ -26,10 +26,15 @@ def get_teams():
   return query("SELECT DISTINCT(team) FROM player")
 
 def simulate_match():
+  teams = get_teams()
+  if len(teams) == 0:
+    return {}
   team1, team2 = list(map(lambda x: x['team'], random.sample(get_teams(), k=2)))
 
   team1_players = get_players(team1)
   team2_players = get_players(team2)
+  if len(team1_players) == 0 or len(team2_players) == 0:
+    return {}
 
   team1_rating = sum([player['rating'] for player in team1_players])
   team2_rating = sum([player['rating'] for player in team2_players])
