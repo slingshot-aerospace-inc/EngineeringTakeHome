@@ -3,15 +3,15 @@ image:
 # Commands to start on workspace startup
 tasks:
   - name: DB
-    init: docker-compose pull
-    command: docker-compose up
+    init: docker-compose -f .gitpod.docker-compose.yml pull
+    command: docker-compose -f .gitpod.docker-compose.yml up
   - name: Simulator
     init: |
       cd /workspace/slingshot-takehome/simulator
       pipenv install
     command: |
       cd /workspace/slingshot-takehome/simulator
-      pipenv run uvicorn main:app --reload
+      pipenv run uvicorn --host 0.0.0.0 main:app --reload
   - name: Ingest
     init: |
       cd /workspace/slingshot-takehome/ingest

@@ -5,6 +5,74 @@ networks:
     name: takehome
 
 services:
+  frontend:
+    image: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/workspace/slingshot-takehome/frontend
+    command: bash -c "cd /workspace/slingshot-takehome/frontend && npm run start"
+
+  backend:
+    image: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: postgres
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend:/workspace/slingshot-takehome/backend
+    command: bash -c "cd /workspace/slingshot-takehome/backend && npm run dev"
+    depends_on:
+      - postgres_init
+
+  ingest:
+    image: ingest
+    build:
+      context: ./ingest
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: postgres
+      SIM_HOST: simulator
+    volumes:
+      - ./ingest/src:/workspace/slingshot-takehome/ingest/src
+    command: bash -c 'cd /workspace/slingshot-takehome/ingest && pipenv run python -m src'
+    depends_on:
+      - simulator
+
+  simulator:
+    image: simulator
+    build:
+      context: ./simulator
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: postgres
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./simulator/src:/workspace/slingshot-takehome/simulator/src
+    command: bash -c 'cd /workspace/slingshot-takehome/simulator && pipenv run uvicorn main:app --host 0.0.0.0 --reload'
+    depends_on:
+      - postgres_init
+
+  postgres_init:
+    image: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: postgres
+    volumes:
+      - ./backend:/workspace/slingshot-takehome/backend
+    command: bash -c "cd /workspace/slingshot-takehome/backend && npm run resetDB"
+    depends_on:
+      - postgres
+
   postgres:
     image: postgres:13.4-alpine3.14
     environment:

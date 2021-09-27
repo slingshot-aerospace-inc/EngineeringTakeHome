@@ -3,9 +3,12 @@ import psycopg2.extras
 import random
 import math
 import time
+import os
+
+DB_HOST = os.getenv("DB_HOST", "localhost")
 
 def get_database_connection():
-  return psycopg2.connect("dbname=postgres host=127.0.0.1 user=postgres password=password")
+  return psycopg2.connect(f"dbname=postgres host={DB_HOST} user=postgres password=password")
 
 def query(query, params=None):
   conn = get_database_connection()
