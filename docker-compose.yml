@@ -13,8 +13,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend:/workspace/slingshot-takehome/frontend
-    command: bash -c "cd /workspace/slingshot-takehome/frontend && npm run start"
+      - ./frontend:/workspace/engineeringtakehome/frontend
+    command: bash -c "cd /workspace/engineeringtakehome/frontend && npm run start"
 
   backend:
     image: backend
@@ -26,8 +26,8 @@ services:
     ports:
       - "3001:3001"
     volumes:
-      - ./backend:/workspace/slingshot-takehome/backend
-    command: bash -c "cd /workspace/slingshot-takehome/backend && npm run dev"
+      - ./backend:/workspace/engineeringtakehome/backend
+    command: bash -c "cd /workspace/engineeringtakehome/backend && npm run dev"
     depends_on:
       postgres_init:
         condition: service_healthy
@@ -42,8 +42,8 @@ services:
       SIM_HOST: simulator
       PYTHONUNBUFFERED: 1
     volumes:
-      - ./ingest/src:/workspace/slingshot-takehome/ingest/src
-    command: bash -c 'cd /workspace/slingshot-takehome/ingest && pipenv run python -m src'
+      - ./ingest/src:/workspace/engineeringtakehome/ingest/src
+    command: bash -c 'cd /workspace/engineeringtakehome/ingest && pipenv run python -m src'
     depends_on:
       - simulator
 
@@ -57,13 +57,13 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./simulator/src:/workspace/slingshot-takehome/simulator/src
+      - ./simulator/src:/workspace/engineeringtakehome/simulator/src
     command: bash -c "
         while ! psql postgres://postgres:password@postgres:5432 --pset=pager=off -c 'SELECT * FROM player LIMIT 1' >/dev/null 2>&1; do
           echo waiting for schema migration;
           sleep 1;
         done;
-        cd /workspace/slingshot-takehome/simulator;
+        cd /workspace/engineeringtakehome/simulator;
         pipenv run uvicorn main:app --host 0.0.0.0 --reload;
       "
     depends_on:
@@ -78,14 +78,14 @@ services:
     environment:
       DB_HOST: postgres
     volumes:
-      - ./backend:/workspace/slingshot-takehome/backend
+      - ./backend:/workspace/engineeringtakehome/backend
     command: bash -c "
         rm -f /tmp/done;
         while ! psql postgres://postgres:password@postgres:5432 --pset=pager=off -c 'SELECT 1' >/dev/null 2>&1; do
           echo waiting for postgres;
           sleep 1;
         done;
-        cd /workspace/slingshot-takehome/backend;
+        cd /workspace/engineeringtakehome/backend;
         npm run resetDB;
         touch /tmp/done;
         sleep 10;

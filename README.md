@@ -15,7 +15,7 @@ The code can be run using docker-compose or gitpod.io
 Launch the containers with docker-compose: `docker-compose --build up`
 
 ### gitpod
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/marc-slingshot/slingshot-takehome)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/slingshot-aerospace-inc/engineeringtakehome)
 
 1. Click the link above
 1. Once the containers are pulled and the VS Code IDE opens up the containers will be launched
