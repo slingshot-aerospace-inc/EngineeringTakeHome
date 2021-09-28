@@ -12,7 +12,9 @@ The application is comprised of 5 containers.
 The code can be run using docker-compose or gitpod.io
 
 ### docker-compose
-Launch the containers with docker-compose: `docker-compose --build up`
+Use docker and docker-compose to run the containers.  Docker and docker-compose can be installed on Windows or Mac with [Docker Desktop](https://www.docker.com/products/docker-desktop).  On Linux installation may vary but your OS repository likely has some packages for docker and docker-compose.
+
+Once docker and docker-compose are installed and running you can build and launch the containers with docker-compose: `docker-compose --build up`
 
 ### gitpod
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/slingshot-aerospace-inc/engineeringtakehome)
