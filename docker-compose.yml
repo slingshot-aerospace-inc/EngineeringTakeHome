@@ -5,6 +5,105 @@ networks:
     name: takehome
 
 services:
+  frontend:
+    image: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/workspace/engineeringtakehome/frontend
+    command: bash -c "cd /workspace/engineeringtakehome/frontend && npm run start"
+
+  backend:
+    image: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: postgres
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend:/workspace/engineeringtakehome/backend
+    command: bash -c "cd /workspace/engineeringtakehome/backend && npm run dev"
+    depends_on:
+      postgres_init:
+        condition: service_healthy
+
+  ingest:
+    image: ingest
+    build:
+      context: ./ingest
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: postgres
+      SIM_HOST: simulator
+      PYTHONUNBUFFERED: 1
+    volumes:
+      - ./ingest/src:/workspace/engineeringtakehome/ingest/src
+    command: bash -c "
+        eval \"$$(pyenv init -)\";
+        cd /workspace/engineeringtakehome/ingest;
+        exec pipenv run python -m src;
+      "
+    depends_on:
+      - simulator
+
+  simulator:
+    image: simulator
+    build:
+      context: ./simulator
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: postgres
+      PYTHONUNBUFFERED: 1
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./simulator/src:/workspace/engineeringtakehome/simulator/src
+    command: bash -c "
+        while ! psql postgres://postgres:password@postgres:5432 --pset=pager=off -c 'SELECT * FROM player LIMIT 1' >/dev/null 2>&1; do
+          echo waiting for schema migration;
+          sleep 1;
+        done;
+        cd /workspace/engineeringtakehome/simulator;
+        eval \"$$(pyenv init -)\";
+        exec pipenv run uvicorn main:app --host 0.0.0.0 --reload;
+      "
+    depends_on:
+      postgres_init:
+        condition: service_healthy
+
+  postgres_init:
+    image: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: postgres
+    volumes:
+      - ./backend:/workspace/engineeringtakehome/backend
+    command: bash -c "
+        rm -f /tmp/done;
+        while ! psql postgres://postgres:password@postgres:5432 --pset=pager=off -c 'SELECT 1' >/dev/null 2>&1; do
+          echo waiting for postgres;
+          sleep 1;
+        done;
+        cd /workspace/engineeringtakehome/backend;
+        npm run resetDB;
+        touch /tmp/done;
+        sleep 10;
+      "
+    healthcheck:
+      test: ["CMD", "bash", "-c", "[ -f /tmp/done ]"]
+      interval: 1s
+      retries: 1000
+    depends_on:
+      postgres:
+        condition: service_healthy
+
   postgres:
     image: postgres:13.4-alpine3.14
     environment:
@@ -13,3 +112,8 @@ services:
       - POSTGRES_PASSWORD=password
     ports:
       - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

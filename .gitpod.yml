@@ -3,34 +3,38 @@ image:
 # Commands to start on workspace startup
 tasks:
   - name: DB
-    init: docker-compose pull
-    command: docker-compose up
+    init: docker-compose -f .gitpod.docker-compose.yml pull
+    command: docker-compose -f .gitpod.docker-compose.yml up
   - name: Simulator
     init: |
-      cd /workspace/slingshot-takehome/simulator
+      cd /workspace/engineeringtakehome/simulator
       pipenv install
     command: |
-      cd /workspace/slingshot-takehome/simulator
-      pipenv run uvicorn main:app --reload
+      while ! psql postgres://postgres:password@postgres:5432 --pset=pager=off -c 'SELECT * FROM player LIMIT 1' >/dev/null 2>&1; do
+        echo waiting for schema migration;
+        sleep 1;
+      done;
+      cd /workspace/engineeringtakehome/simulator
+      pipenv run uvicorn --host 0.0.0.0 main:app --reload
   - name: Ingest
     init: |
-      cd /workspace/slingshot-takehome/ingest
+      cd /workspace/engineeringtakehome/ingest
       pipenv install
     command: |
-      cd /workspace/slingshot-takehome/ingest
+      cd /workspace/engineeringtakehome/ingest
       pipenv run python -m src
   - name: Backend
     init: |
-      cd /workspace/slingshot-takehome/backend
+      cd /workspace/engineeringtakehome/backend
       npm i
     command: |
-      cd /workspace/slingshot-takehome/backend
+      cd /workspace/engineeringtakehome/backend
       while ! psql postgres://postgres:password@127.0.0.1:5432 --pset=pager=off -c 'SELECT 1'; do echo 'waiting for postgres'; sleep 1; done
       npm run resetDB
       npm run dev
   - name: Frontend
-    init: cd /workspace/slingshot-takehome/frontend && npm i
-    command: cd /workspace/slingshot-takehome/frontend && npm run start
+    init: cd /workspace/engineeringtakehome/frontend && npm i
+    command: cd /workspace/engineeringtakehome/frontend && npm run start
 # Ports to expose on workspace startup
 ports:
   - port: 3000

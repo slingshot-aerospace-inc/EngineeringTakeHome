@@ -37,8 +37,14 @@ async function initialize() {
 
   const httpServer = createServer(expressApp);
 
+  const port = 3001;
+  const gitpodURL = process.env.GITPOD_WORKSPACE_URL;
+  const hostURL = gitpodURL
+    ? gitpodURL.replace(/(https?:\/\/)/, `$1${port}-`)
+    : "http://localhost:3001";
+
   const server = httpServer.listen(3001, () =>
-    console.log(`\r\n 🚀 Server ready at http://localhost:${3001}/graphql`)
+    console.log(`\r\n 🚀 Server ready at ${hostURL}/graphql`)
   );
 }
 

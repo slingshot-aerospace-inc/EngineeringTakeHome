@@ -4,9 +4,13 @@ import psycopg2
 import psycopg2.extras
 import json
 import datetime
+import os
+
+DB_HOST=os.getenv("DB_HOST", "localhost")
+SIM_HOST=os.getenv("SIM_HOST", "localhost")
 
 def get_database_connection():
-  return psycopg2.connect("dbname=postgres host=127.0.0.1 user=postgres password=password")
+  return psycopg2.connect(f"dbname=postgres host={DB_HOST} user=postgres password=password")
 
 def store_match_results(date, team1, team2, team1_players, team2_players, team1_score, team2_score, winner):
   conn = get_database_connection()
@@ -31,12 +35,11 @@ def match_exists(date, team1, team2):
   conn.close()
   return len(res) != 0
 
-
 def main():
   try:
     while True:
       try:
-        r = requests.get('http://localhost:8000/last_match_results')
+        r = requests.get(f'http://{SIM_HOST}:8000/last_match_results')
         res = json.loads(r.text)
         date = datetime.datetime.fromtimestamp(res['match_date_time'])
         team1 = res['team1']['name']

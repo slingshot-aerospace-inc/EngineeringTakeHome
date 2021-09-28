@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { Ctx, Query, Resolver } from "type-graphql";
-import { Player, PlayersResponse } from "./PlayerResponse";
+import { PlayersResponse } from "./PlayerResponse";
 import { PlayerEntity } from "./PlayerEntity";
 import { Context } from "../../types/Context";
 
