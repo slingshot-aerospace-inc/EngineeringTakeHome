@@ -9,7 +9,7 @@ The application is comprised of 5 containers.
 1. Postgres Database
 
 ## Running the code
-The code can be run using docker-compose or gitpod.io
+The code can be run using docker-compose or gitpod.io.  Most of the applications and services should auto restart when files are changed.
 
 ### docker-compose
 Use docker and docker-compose to run the containers.  Docker and docker-compose can be installed on Windows or Mac with [Docker Desktop](https://www.docker.com/products/docker-desktop).  On Linux installation may vary but your OS repository likely has some packages for docker and docker-compose.
