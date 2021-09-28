@@ -43,7 +43,11 @@ services:
       PYTHONUNBUFFERED: 1
     volumes:
       - ./ingest/src:/workspace/engineeringtakehome/ingest/src
-    command: bash -c 'cd /workspace/engineeringtakehome/ingest && pipenv run python -m src'
+    command: bash -c "
+        eval \"$$(pyenv init -)\";
+        cd /workspace/engineeringtakehome/ingest;
+        pipenv run python -m src;
+      "
     depends_on:
       - simulator
 
@@ -54,6 +58,7 @@ services:
       dockerfile: Dockerfile
     environment:
       DB_HOST: postgres
+      PYTHONUNBUFFERED: 1
     ports:
       - "8000:8000"
     volumes:
@@ -64,6 +69,7 @@ services:
           sleep 1;
         done;
         cd /workspace/engineeringtakehome/simulator;
+        eval \"$$(pyenv init -)\";
         pipenv run uvicorn main:app --host 0.0.0.0 --reload;
       "
     depends_on:
