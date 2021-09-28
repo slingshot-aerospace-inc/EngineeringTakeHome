@@ -10,6 +10,10 @@ tasks:
       cd /workspace/engineeringtakehome/simulator
       pipenv install
     command: |
+      while ! psql postgres://postgres:password@postgres:5432 --pset=pager=off -c 'SELECT * FROM player LIMIT 1' >/dev/null 2>&1; do
+        echo waiting for schema migration;
+        sleep 1;
+      done;
       cd /workspace/engineeringtakehome/simulator
       pipenv run uvicorn --host 0.0.0.0 main:app --reload
   - name: Ingest
