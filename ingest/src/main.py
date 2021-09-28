@@ -35,7 +35,6 @@ def match_exists(date, team1, team2):
   conn.close()
   return len(res) != 0
 
-
 def main():
   try:
     while True:

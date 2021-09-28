@@ -46,7 +46,7 @@ services:
     command: bash -c "
         eval \"$$(pyenv init -)\";
         cd /workspace/engineeringtakehome/ingest;
-        pipenv run python -m src;
+        exec pipenv run python -m src;
       "
     depends_on:
       - simulator
@@ -70,7 +70,7 @@ services:
         done;
         cd /workspace/engineeringtakehome/simulator;
         eval \"$$(pyenv init -)\";
-        pipenv run uvicorn main:app --host 0.0.0.0 --reload;
+        exec pipenv run uvicorn main:app --host 0.0.0.0 --reload;
       "
     depends_on:
       postgres_init:
