@@ -18,7 +18,7 @@ Then, run the following command to get the app up and running:
 
 You should see the following screen:
 
-INSERT SCREENSHOT OF WORKING APP
+![app-screenshot](app-screenshot.png)
 
 Fantastic! Now, on to the take-home test!
 
@@ -62,7 +62,7 @@ You crack your knuckles, plug in your laptop and get to work...
 
 > Note, Harry’s Mocks are incomplete, if something is incomplete from his mocks, make an assumption!
 
-[Here](./ui_mocks.png) are the mocks!
+[![Here](./ui_mocks.png)](./ui_mocks.png)) are the mocks!
 
 If you get stuck, don't hesitate to reach out to
 some_email@slingshotaerospace.com
