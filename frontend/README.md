@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Frontend
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -6,9 +6,11 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
+This project also uses [Typescript](https://www.typescriptlang.org/), [Apollo Client](https://www.apollographql.com/docs/react/), and [Material UI](https://mui.com/).
+
 ## Getting the app running
 
-First, make sure you have Node version X or later.
+First, make sure you have Node version 14 or later.
 
 Then, run the following command to get the app up and running:
 
@@ -19,6 +21,9 @@ You should see the following screen:
 INSERT SCREENSHOT OF WORKING APP
 
 Fantastic! Now, on to the take-home test!
+
+## GraphQL API Types
+If the GraphQL API endpoint has changed you will need to regenerate the typescript definitions for the API to use the types.  With the API server running run `npm run generate:tyeps`.  This will generate a new `src/types/graphql.ts` file that matches the current queries and types defined by the API.
 
 ## Take Home Test
 
@@ -64,5 +69,5 @@ some_email@slingshotaerospace.com
 
 ## Submission
 
-Fork this repo and send a link to your soultion to some_email@slingshotaerospace.com.
+Fork this repo and send a link to your solution to some_email@slingshotaerospace.com.
 
