@@ -2,45 +2,67 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Getting the app running
+
+First, make sure you have Node version X or later.
+
+Then, run the following command to get the app up and running:
+
+`npm install && npm run start`
+
+You should see the following screen:
+
+INSERT SCREENSHOT OF WORKING APP
+
+Fantastic! Now, on to the take-home test!
+
+## Take Home Test
+
+For the FE test, we will be evaluating your ability to take a lo-fi screen and
+make serviceable prototype. Don't spend more than an hour or so on this, but be
+prepared to talk about your code.
+
+We don't expect this to be production ready, we want to respect your time and this
+is just our way of getting to see how you think and code without the pressure of
+an incredibly stressful in-person pairing evaluation. So, please be prudent with
+your time, we are excited to talk about this with you!
+
+To make this a little more fun, here is a silly scenario to get you started... :)
+
+## Scenario
+
+It’s Thursday and you are packing up your bags to head off to your favorite bar, “La Chancla”, with some friends from college when you hear someone burst into the office.
+
+There stands your brilliant UX designer, Harry. Glasses crooked, hair wild, his hands look like he was attacked by a gang of sharpies.
+
+“Oh good, I caught you in time!I totally forgot that we have an investor meeting Monday morning and I was hoping you could whip up some prototypes for me. Considering you are kind of a Big Deal™ around here, I’m sure you’ll get it done in no time!”
+
+Although his attempts at flattery are pathetic, judging by the coffee stains on his pants, you decide La Chancla will have to wait. Also, you are kind of a Big Deal™.
+
+“Fine, but you’re getting the first round at La Chancla”, you say, pulling out your Space Gray MacBook Pro.
+
+Relief floods the room as Harry eagerly rushes to your side and shows you the mocks.
+
+“They are really rough for now, so don’t worry about them being pixel perfect, I need more of the big picture stuff done.”
+
+You give him your best, “I got this, go take a nap you look really tired” look, but it’s kind of a hard expression to communicate in one look.
+
+“Don’t worry Harry, I’ll be done in no time”.
+
+You crack your knuckles, plug in your laptop and get to work...
+
+> Note, Harry’s Mocks are incomplete, if something is incomplete from his mocks, make an assumption!
+
+[Here](./ui_mocks.png) are the mocks!
+
+If you get stuck, don't hesitate to reach out to
+some_email@slingshotaerospace.com
+
+## Submission
+
+Fork this repo and send a link to your soultion to some_email@slingshotaerospace.com.
+
